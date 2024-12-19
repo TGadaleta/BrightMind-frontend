@@ -19,8 +19,8 @@ function App() {
 	return (
 		<div className='App'>
 			<Routes>
-				<Route path='/signup' element={<SignupForm />} />
 				<Route path='/' element={<Landing />} />
+				<Route path='/signup' element={<SignupForm />} />
 			</Routes>
 		</div>
 	);
