@@ -13,6 +13,10 @@ const Landing = () => {
 
 	return (
 		<div className={styles.container}>
+			<h1>
+				Welcome<br></br>to<br></br>
+				<em>Brightmind</em>
+			</h1>
 			<div className={styles.formContainer}>
 				<form onSubmit={handleSubmit}>
 					<div className={styles.inputGroup}>
@@ -25,7 +29,7 @@ const Landing = () => {
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
 							className={styles.input}
-							placeholder='Enter your usernames'
+							placeholder='Enter your username'
 							required
 						/>
 					</div>

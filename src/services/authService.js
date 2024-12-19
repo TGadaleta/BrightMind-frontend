@@ -1,4 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/Brightmind`;
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/brightmind`;
 
 // GET
 const index = async () => {
