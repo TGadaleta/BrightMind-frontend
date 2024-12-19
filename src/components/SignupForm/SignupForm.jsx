@@ -1,133 +1,124 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './SignupForm.module.css';
+import * as authService from '../../services/authServices.js';
 
-const Signup = () => {
-	const [username, setUsername] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [passwordConf, setPasswordConf] = useState('');
-	const [errorMessage, setErrorMessage] = useState('');
+const SignupForm = (props) => {
+	const navigate = useNavigate();
+	const [formData, setFormData] = useState({
+		username: '',
+		email: '',
+		password: '',
+		passwordConf: '',
+	});
 
-	// Validation function to check if passwords match
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
 	const isFormValid = () => {
-		return username && email && password && password === passwordConf;
+		const { username, password, passwordConf } = formData;
+		return username && password && password === passwordConf;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		// Check if passwords match
-		if (password !== passwordConf) {
-			setErrorMessage('Passwords do not match');
-			return;
+		try {
+			const newUserResponse = await authService.signup(formData);
+			props.setUser(newUserResponse.user);
+			navigate('/');
+		} catch (error) {
+			console.error(error);
 		}
-
-		setErrorMessage('');
-
-		// Log the form data
-		console.log('Username:', username);
-		console.log('Email:', email);
-		console.log('Password:', password);
-
-		// Reset form after successful submit (optional)
-		setUsername('');
-		setEmail('');
-		setPassword('');
-		setPasswordConf('');
 	};
+
+	const { username, email, password, passwordConf } = formData;
 
 	return (
-		<>
-			<div className={styles.container}>
-				<div className={styles.formContainer}>
-					<h1 className={styles.title}>Sign Up</h1>
-					<h1 className='bm'>Bright Mind</h1>
-					<h1 className='sign'>Sign-up</h1>
+		<div className={styles.container}>
+			<div className={styles.formContainer}>
+				<h1 className={styles.title}>Sign Up</h1>
+				<h1 className='bm'>Bright Mind</h1>
+				<h1 className='sign'>Sign-up</h1>
 
-					<form onSubmit={handleSubmit}>
-						<div className={styles.inputGroup}>
-							<label htmlFor='username' className={styles.label}>
-								Username
-							</label>
-							<input
-								type='text'
-								id='username'
-								value={username}
-								onChange={(e) => setUsername(e.target.value)}
-								className={styles.input}
-								placeholder='Enter your username'
-								required
-							/>
-						</div>
+				<form onSubmit={handleSubmit}>
+					<div className={styles.inputGroup}>
+						<label htmlFor='username' className={styles.label}>
+							Username
+						</label>
+						<input
+							type='text'
+							id='username'
+							value={username}
+							name='username'
+							onChange={handleChange}
+							className={styles.input}
+							placeholder='Enter your username'
+							required
+						/>
+					</div>
 
-						<div className={styles.inputGroup}>
-							<label htmlFor='email' className={styles.label}>
-								Email
-							</label>
-							<input
-								type='email'
-								id='email'
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								className={styles.input}
-								placeholder='Enter your email'
-								required
-							/>
-						</div>
+					<div className={styles.inputGroup}>
+						<label htmlFor='email' className={styles.label}>
+							Email
+						</label>
+						<input
+							type='email'
+							id='email'
+							value={email}
+							name='email'
+							onChange={handleChange}
+							className={styles.input}
+							placeholder='Enter your email'
+							required
+						/>
+					</div>
 
-						<div className={styles.inputGroup}>
-							<label htmlFor='password' className={styles.label}>
-								Password
-							</label>
-							<input
-								type='password'
-								id='password'
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								className={styles.input}
-								placeholder='Enter your password'
-								required
-							/>
-						</div>
+					<div className={styles.inputGroup}>
+						<label htmlFor='password' className={styles.label}>
+							Password
+						</label>
+						<input
+							type='password'
+							id='password'
+							value={password}
+							name='password'
+							onChange={handleChange}
+							className={styles.input}
+							placeholder='Enter your password'
+							required
+						/>
+					</div>
 
-						{/* Confirm Password field */}
-						<div className={styles.inputGroup}>
-							<label htmlFor='confirmPassword' className={styles.label}>
-								Confirm Password
-							</label>
-							<input
-								type='password'
-								id='confirmPassword'
-								value={passwordConf}
-								onChange={(e) => setPasswordConf(e.target.value)}
-								className={styles.input}
-								placeholder='Confirm your password'
-								required
-							/>
-						</div>
+					<div className={styles.inputGroup}>
+						<label htmlFor='confirmPassword' className={styles.label}>
+							Confirm Password
+						</label>
+						<input
+							type='password'
+							id='confirmPassword'
+							value={passwordConf}
+							name='passwordConf'
+							onChange={handleChange}
+							className={styles.input}
+							placeholder='Confirm your password'
+							required
+						/>
+					</div>
 
-						{/* Error message */}
-						{errorMessage && (
-							<div className={styles.errorMessage}>
-								<p>{errorMessage}</p>
-							</div>
-						)}
-
-						{/* Submit button */}
-						<div className={styles.buttons}>
-							<button
-								type='submit'
-								className={styles.signUpBtn}
-								disabled={!isFormValid()} // Disable if form is invalid
-							>
-								Submit
-							</button>
-						</div>
-					</form>
-				</div>
+					<div className={styles.buttons}>
+						<button
+							disabled={!isFormValid()} // Disable if form is invalid
+							type='submit'
+							className={styles.signUpBtn}
+						>
+							Submit
+						</button>
+					</div>
+				</form>
 			</div>
-		</>
+		</div>
 	);
 };
 
-export default Signup;
+export default SignupForm;

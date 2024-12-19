@@ -1,20 +1,38 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './Landing.module.css';
+import * as authService from '../../services/authServices.js';
 
-const Landing = () => {
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
+const Landing = (props) => {
+	const navigate = useNavigate();
+	const [formData, setFormData] = useState({
+		username: '',
+		password: '',
+	});
 
-	const handleSubmit = (e) => {
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log('Username:', username);
-		console.log('Password:', password);
+		try {
+			const user = await authService.signin(formData);
+			console.log(user);
+			props.setUser(user);
+			navigate('/');
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	return (
 		<div className={styles.container}>
 			<h1>
-				Welcome<br></br>to<br></br>
+				Welcome
+				<br />
+				to
+				<br />
 				<em>Brightmind</em>
 			</h1>
 			<div className={styles.formContainer}>
@@ -26,8 +44,9 @@ const Landing = () => {
 						<input
 							type='text'
 							id='username'
-							value={username}
-							onChange={(e) => setUsername(e.target.value)}
+							name='username'
+							value={formData.username}
+							onChange={handleChange}
 							className={styles.input}
 							placeholder='Enter your username'
 							required
@@ -40,8 +59,9 @@ const Landing = () => {
 						<input
 							type='password'
 							id='password'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
+							name='password'
+							value={formData.password}
+							onChange={handleChange}
 							className={styles.input}
 							placeholder='Enter your password'
 							required
@@ -51,7 +71,11 @@ const Landing = () => {
 						<button type='submit' className={styles.signInBtn}>
 							Sign In
 						</button>
-						<button type='button' className={styles.signUpBtn}>
+						<button
+							type='button'
+							className={styles.signUpBtn}
+							onClick={() => navigate('/signup')}
+						>
 							Sign Up
 						</button>
 					</div>
