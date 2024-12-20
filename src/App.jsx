@@ -23,50 +23,50 @@ const App = () => {
 		navigate('/');
 	};
 
-	const mockCourses = [
-		{
-			_id: '1',
-			name: 'Math 101',
-			department: 'Math',
-			description: 'Learn math',
-		},
-		{
-			_id: '2',
-			name: 'Science Basics',
-			department: 'Science',
-			description: 'Learn science',
-		},
-		{
-			_id: '3',
-			name: 'Physics',
-			department: 'Math',
-			description: 'Learn math',
-		},
-		{
-			_id: '4',
-			name: 'History',
-			department: 'Science',
-			description: 'Learn science',
-		},
-		{
-			_id: '5',
-			name: 'History',
-			department: 'Science',
-			description: 'Learn science',
-		},
-		{
-			_id: '6',
-			name: 'History',
-			department: 'Science',
-			description: 'Learn science',
-		},
-		{
-			_id: '7',
-			name: 'History',
-			department: 'Science',
-			description: 'Learn science',
-		},
-	];
+	// const mockCourses = [
+	// 	{
+	// 		_id: '1',
+	// 		name: 'Math 101',
+	// 		department: 'Math',
+	// 		description: 'Learn math',
+	// 	},
+	// 	{
+	// 		_id: '2',
+	// 		name: 'Science Basics',
+	// 		department: 'Science',
+	// 		description: 'Learn science',
+	// 	},
+	// 	{
+	// 		_id: '3',
+	// 		name: 'Physics',
+	// 		department: 'Math',
+	// 		description: 'Learn math',
+	// 	},
+	// 	{
+	// 		_id: '4',
+	// 		name: 'History',
+	// 		department: 'Science',
+	// 		description: 'Learn science',
+	// 	},
+	// 	{
+	// 		_id: '5',
+	// 		name: 'History',
+	// 		department: 'Science',
+	// 		description: 'Learn science',
+	// 	},
+	// 	{
+	// 		_id: '6',
+	// 		name: 'History',
+	// 		department: 'Science',
+	// 		description: 'Learn science',
+	// 	},
+	// 	{
+	// 		_id: '7',
+	// 		name: 'History',
+	// 		department: 'Science',
+	// 		description: 'Learn science',
+	// 	},
+	// ];
 
 	return (
 		<AuthedUserContext.Provider value={user}>
@@ -76,10 +76,7 @@ const App = () => {
 					// Protected routes
 					<>
 						<Route path='/dashboard' element={<Dashboard />} />
-						<Route
-							path='/courses'
-							element={<Courses courses={mockCourses} />}
-						/>
+						<Route path='/courses' element={<Courses />} />
 					</>
 				) : (
 					// Not Protected
