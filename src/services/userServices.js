@@ -29,4 +29,20 @@ const indexTodos = async (userId) => {
     }
 }
 
-export { indexCourses, indexTodos }
+const updateTodos = async (userId, todoId, updatedTodo) => {
+    try {
+        const token = localStorage.getItem("token")
+        const res = await fetch(`${BASE_URL}/${userId}/todos/${todoId}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedTodo)
+        });
+        return res.json()
+    } catch (error) {
+        console.log(error)
+    }
+}
+export { indexCourses, indexTodos, updateTodos }
