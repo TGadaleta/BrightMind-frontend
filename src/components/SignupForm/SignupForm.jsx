@@ -37,7 +37,6 @@ const SignupForm = (props) => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.formContainer}>
-				<h1 className={styles.title}>Sign Up</h1>
 				<h1 className='bm'>Bright Mind</h1>
 				<h1 className='sign'>Sign-up</h1>
 
@@ -108,7 +107,7 @@ const SignupForm = (props) => {
 
 					<div className={styles.buttons}>
 						<button
-							disabled={!isFormValid()} // Disable if form is invalid
+							disabled={!isFormValid()}
 							type='submit'
 							className={styles.signUpBtn}
 						>
