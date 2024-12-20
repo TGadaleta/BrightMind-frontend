@@ -50,7 +50,7 @@ Students are able to join courses created by administrators, work through the le
 | signUp             | /users/signup                              | Create user                | POST   |
 | getUserCourses     | /users/:userId/courses                    | View all courses as user   | GET    |
 | addCourse          | /users/:userId/courses/:courseId          | Add course to user         | PUT    |
-| dropUserCourse     | /users/:userId/courses/:courseId          | Drop enrolled course       | PUT    |
+| dropUserCourse     | /users/:userId/courses/:courseId/drop          | Drop enrolled course       | PUT    |
 | getUserTodos       | /users/:userId/todos                      | Get all user todos         | GET    |
 | createUserTodo     | /users/:userId/todos                      | Create user todo           | POST   |
 | editUserTodo       | /users/:userId/todos/:todoId              | Edit user todo             | PUT    |
