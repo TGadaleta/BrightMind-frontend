@@ -1,15 +1,14 @@
-import { useState, createContext } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import SignupForm from "./components/SignupForm/SignupForm";
-import Landing from "./components/Landing/Landing";
-import SignIn from "./components/Landing/Landing";
-import Navbar from "./components/Navbar/Navbar";
-import Dashboard from "./components/Dashboard/Dashboard";
-import Courses from "./components/Courses/Courses";
-import About from "./components/About/About";
-import * as authService from "../src/services/authServices";
-import Header from "./components/Header/Header";
 import "./App.css";
+import About from "./components/About/About";
+import { useState, createContext } from "react";
+import Navbar from "./components/Navbar/Navbar";
+import SignIn from "./components/Landing/Landing";
+import Courses from "./components/Courses/Courses";
+import Landing from "./components/Landing/Landing";
+import Dashboard from "./components/Dashboard/Dashboard";
+import SignupForm from "./components/SignupForm/SignupForm";
+import * as authService from "../src/services/authServices";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 export const AuthedUserContext = createContext(null);
 
