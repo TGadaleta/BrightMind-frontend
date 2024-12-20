@@ -2,8 +2,7 @@ import React from 'react';
 import { AuthedUserContext } from '../../App';
 
 const Dashboard = () => {
-	const user = React.useContext(AuthedUserContext)
-	
+	const user = React.useContext(AuthedUserContext);
 
 	return (
 		<div>

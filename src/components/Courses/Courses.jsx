@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Courses.module.css';
+import * as coursesServices from '../../services/coursesServices.js';
 
-const Courses = (props) => {
+const Courses = () => {
+	const [courses, setCourses] = useState([]);
+
+	useEffect(() => {
+		const fetchCourses = async () => {
+			const coursesData = await coursesServices.index();
+			setCourses(coursesData);
+		};
+		fetchCourses();
+	}, []);
+	console.log(courses);
 	return (
 		<>
-			<h2>LESSON TITLE</h2>
+			<h2>COURSES</h2>
 
 			<main className={styles.container}>
-				{props.courses.map((course) => (
+				{courses.map((course) => (
 					<Link key={course._id} to={`/course/${course._id}`}>
 						<section>
 							<h2>{course.name}</h2>
