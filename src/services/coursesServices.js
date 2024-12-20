@@ -6,7 +6,7 @@ const index = async () => {
 
 		return res.json();
 	} catch (error) {
-		console.error('error');
+		console.error(error);
 	}
 };
 
