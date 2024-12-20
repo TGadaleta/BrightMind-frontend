@@ -3,10 +3,13 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
+	background-color: #007bff;
+	font-family: Arial, sans-serif;
 }
 
 body {
-	background-color: #007bff; /* background  page */
+	background-color: #007bff;
 	font-family: Arial, sans-serif;
 }
 
@@ -28,6 +31,9 @@ h1 em {
 	border: none;
 	text-align: center;
 	line-height: 20px;
+	color: #888;
+	font-style: italic;
+	text-align: center;
 }
 
 .input::placeholder {

@@ -1,8 +1,9 @@
-html,
+/* html, */
 body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	background-color: #007bff;
 	overflow: hidden;
 }
 
@@ -11,18 +12,12 @@ body {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	background-color: #007bff; /* Background color for the page */
+	margin-top: 0;
+	background-color: #007bff;
 }
 
 .h1 {
 	font-style: italic;
-}
-
-.title {
-	text-align: center;
-	font-size: 32px;
-	margin-bottom: 20px;
-	color: #007bff; /* Color for the title */
 }
 
 .inputGroup {
