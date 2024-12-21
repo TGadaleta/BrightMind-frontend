@@ -20,7 +20,7 @@ const Courses = () => {
 
 			<main className={styles.container}>
 				{courses.map((course) => (
-					<Link key={course._id} to={`/course/${course._id}`}>
+					<Link key={course._id} to={`/courses/${course._id}`}>
 						<section>
 							<h2>{course.name}</h2>
 							<h3>{course.department}</h3>

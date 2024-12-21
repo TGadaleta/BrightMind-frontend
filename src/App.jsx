@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import Dashboard from './components/Dashboard/Dashboard';
 import Courses from './components/Courses/Courses';
 import About from './components/About/About';
+import SoloCourse from './components/SoloCourse/SoloCourse';
 import * as authService from '../src/services/authServices';
 import './App.css';
 
@@ -26,19 +27,20 @@ const App = () => {
 		<AuthedUserContext.Provider value={user}>
 			<Navbar handleSignout={handleSignout} />
 			<Routes>
+				<Route path='/courses' element={<Courses />} />
+				<Route path='/courses/:courseId' element={<SoloCourse />} />
 				{user ? (
 					// Protected routes
 					<>
-						<Route path='/dashboard' element={<Dashboard />} />
-						<Route path='/courses' element={<Courses />} />
+						<Route path='/' element={<Dashboard />} />
 					</>
 				) : (
 					// Not Protected
 					<>
 						<Route path='/' element={<Landing />} />
 						<Route path='/about' element={<About />} />
-						<Route path='/signup' element={<SignupForm setUser={setUser} />} />
 						<Route path='/signin' element={<SignIn setUser={setUser} />} />
+						<Route path='/signup' element={<SignupForm setUser={setUser} />} />
 					</>
 				)}
 			</Routes>

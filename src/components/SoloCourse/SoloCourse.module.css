@@ -1,0 +1,71 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	flex-direction: column;
+	overflow: auto;
+	display: block;
+}
+
+.container {
+	display: block;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 30px;
+	min-height: 100vh;
+	padding: 20px;
+	font-size: 18px;
+	width: 100%;
+	overflow: auto;
+	flex-grow: 1;
+	/* background-color: #007bff; */
+	text-align: left;
+}
+
+p {
+	font-size: 22px;
+	color: #fff;
+}
+
+.lessonsContainer {
+	margin-top: 2rem;
+	margin-bottom: 10rem;
+}
+
+.lessonList {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.lessonCard {
+	margin-bottom: 10px;
+	/* background-color: #fff; */
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 20px;
+	width: 30%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.lessonCard h3 {
+	font-size: 1.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.lessonCard p {
+	margin: 0.5rem 0;
+	font-size: 1rem;
+}
+
+.lessonCard a {
+	display: inline-block;
+	margin-top: 1rem;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.lessonCard a:hover {
+	text-decoration: underline;
+}
