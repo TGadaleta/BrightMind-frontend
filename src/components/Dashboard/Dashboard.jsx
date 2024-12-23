@@ -42,7 +42,10 @@ const Dashboard = () => {
     evt.preventDefault();
 
     if (formData.editingId) {
-      await updateTodo(formData.editingId, { text: formData.text, isComplete: formData.isComplete });
+      await updateTodo(formData.editingId, {
+        text: formData.text,
+        isComplete: formData.isComplete,
+      });
       setFormData({ text: "" });
       await fetchTodos();
     } else {
@@ -77,19 +80,34 @@ const Dashboard = () => {
         await fetchTodos();
       }
     } catch (error) {
-      console.error(`Error deleting todo with ID ${formData.editingId}:`, error);
+      console.error(
+        `Error deleting todo with ID ${formData.editingId}:`,
+        error
+      );
     }
   };
 
   const editTodo = (todoId) => {
     const todoToEdit = todos.find((todo) => todo._id === todoId);
     if (todoToEdit) {
-      setFormData({ text: todoToEdit.text, isComplete: todoToEdit.isComplete, editingId: todoId });
+      setFormData({
+        text: todoToEdit.text,
+        isComplete: todoToEdit.isComplete,
+        editingId: todoId,
+      });
     }
   };
 
-  const dropCourse = (courseId) => {
-    console.log(`Drop course functionality for course with ID ${courseId}`);
+  const dropCourse = async (courseId) => {
+    try {
+      await userServices.dropCourse(userId, courseId);
+      const droppedCourse = courses.find((course) => course._id === courseId);
+      setCourses((prevCourses) =>
+        prevCourses.filter((course) => course._id !== courseId)
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const completeTodo = async (e, todoId) => {
@@ -143,7 +161,6 @@ const Dashboard = () => {
             </p>
           </article>
         ))}
-
         <form onSubmit={handleSubmit}>
           <label htmlFor="todo-input">Todo:</label>
           <textarea
