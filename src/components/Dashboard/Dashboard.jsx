@@ -40,7 +40,14 @@ const Dashboard = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    await handleCreateTodo();
+
+    if (formData.editingId) {
+      await updateTodo(formData.editingId, { text: formData.text, isComplete: formData.isComplete });
+      setFormData({ text: "" });
+      await fetchTodos();
+    } else {
+      await handleCreateTodo();
+    }
   };
 
   const handleCreateTodo = async () => {
@@ -54,12 +61,31 @@ const Dashboard = () => {
     }
   };
 
-  const deleteTodo = (todoId) => {
-    console.log(`Delete functionality for todo with ID ${todoId}`);
+  const updateTodo = async (todoId, updatedData) => {
+    try {
+      await userServices.updateTodos(userId, todoId, updatedData);
+    } catch (error) {
+      console.error(`Error updating todo with ID ${todoId}:`, error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      if (formData.editingId) {
+        await userServices.deleteTodo(userId, formData.editingId);
+        setFormData({ text: "" });
+        await fetchTodos();
+      }
+    } catch (error) {
+      console.error(`Error deleting todo with ID ${formData.editingId}:`, error);
+    }
   };
 
   const editTodo = (todoId) => {
-    console.log(`Edit functionality for todo with ID ${todoId}`);
+    const todoToEdit = todos.find((todo) => todo._id === todoId);
+    if (todoToEdit) {
+      setFormData({ text: todoToEdit.text, isComplete: todoToEdit.isComplete, editingId: todoId });
+    }
   };
 
   const dropCourse = (courseId) => {
@@ -128,7 +154,14 @@ const Dashboard = () => {
             value={formData.text}
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">
+            {formData.editingId ? "Update Todo" : "Submit"}
+          </button>
+          {formData.editingId && (
+            <button type="button" onClick={handleDelete}>
+              Delete Todo
+            </button>
+          )}
         </form>
       </section>
     </>

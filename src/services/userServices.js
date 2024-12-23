@@ -62,4 +62,21 @@ const updateTodos = async (userId, todoId, updatedTodo) => {
         console.log(error)
     }
 }
-export { indexCourses, indexTodos, updateTodos, createTodo }
+
+const deleteTodo = async (userId, todoId) => {
+    const token = localStorage.getItem("token");
+  
+    const res = await fetch(`${BASE_URL}/${userId}/todos/${todoId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  
+    if (!res.ok) {
+      throw new Error(`Failed to delete todo with ID ${todoId}`);
+    }
+  
+    return await res.json();
+  };
+export { indexCourses, indexTodos, updateTodos, createTodo, deleteTodo }
