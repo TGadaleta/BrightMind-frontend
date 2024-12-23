@@ -70,8 +70,9 @@ p {
 	text-decoration: underline;
 }
 
-.topLeftButton {
+.topRightButton {
 	position: absolute;
 	top: 7rem;
 	right: 5rem;
+	z-index: 100;
 }

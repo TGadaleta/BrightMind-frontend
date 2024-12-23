@@ -51,7 +51,7 @@ const SoloCourse = ({ user }) => {
 							</div>
 						))}
 					</div>
-					<div className={styles.topLeftButton}>
+					<div className={styles.topRightButton}>
 						<button type='submit' className={styles.joinBtn}>
 							Join
 						</button>
