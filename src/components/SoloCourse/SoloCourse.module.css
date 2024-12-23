@@ -19,8 +19,8 @@ body {
 	width: 100%;
 	overflow: auto;
 	flex-grow: 1;
-	/* background-color: #007bff; */
 	text-align: left;
+	position: relative;
 }
 
 p {
@@ -68,4 +68,10 @@ p {
 
 .lessonCard a:hover {
 	text-decoration: underline;
+}
+
+.topLeftButton {
+	position: absolute;
+	top: 7rem;
+	right: 5rem;
 }

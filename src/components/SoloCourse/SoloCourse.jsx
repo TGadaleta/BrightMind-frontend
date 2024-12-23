@@ -51,6 +51,11 @@ const SoloCourse = ({ user }) => {
 							</div>
 						))}
 					</div>
+					<div className={styles.topLeftButton}>
+						<button type='submit' className={styles.joinBtn}>
+							Join
+						</button>
+					</div>
 				</div>
 			) : (
 				<p>No lessons available for this course.</p>
