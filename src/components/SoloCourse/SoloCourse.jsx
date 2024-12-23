@@ -33,13 +33,11 @@ const SoloCourse = ({ user }) => {
 					<div className={styles.lessonList}>
 						{course.lessons.map((lesson) => (
 							<div key={lesson._id} className={styles.lessonCard}>
-								<h3>{lesson.title}</h3>
-								<p>{lesson.description}</p>
 								<p>
-									<strong>Title:</strong> {lesson.title || 'N/A'}
+									<strong>Title:</strong> {lesson.name || 'N/A'}
 								</p>
 								<p>
-									<strong>Description:</strong> {lesson.description || 'TBA'}
+									<strong>Description:</strong> {lesson.text || 'TBA'}
 								</p>
 
 								{/* Authorized Users */}
