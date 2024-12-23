@@ -1,3 +1,4 @@
+
 import "./App.css";
 import About from "./components/About/About";
 import { useState, createContext } from "react";
@@ -10,17 +11,19 @@ import SignupForm from "./components/SignupForm/SignupForm";
 import * as authService from "../src/services/authServices";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
+
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
-  const navigate = useNavigate();
-  const [user, setUser] = useState(authService.getUser());
+	const navigate = useNavigate();
+	const [user, setUser] = useState(authService.getUser());
 
-  const handleSignout = () => {
-    authService.signout();
-    setUser(null);
-    navigate("/");
-  };
+	const handleSignout = () => {
+		authService.signout();
+		setUser(null);
+		navigate('/');
+	};
+
 
   return (
     <>
@@ -50,6 +53,7 @@ const App = () => {
       </AuthedUserContext.Provider>
     </>
   );
+
 };
 
 export default App;

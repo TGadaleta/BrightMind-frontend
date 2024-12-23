@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
+
   const user = React.useContext(AuthedUserContext);
   const [courses, setCourses] = useState([]);
   const [todos, setTodos] = useState([]);
