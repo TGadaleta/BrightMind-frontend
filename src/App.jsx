@@ -23,29 +23,32 @@ const App = () => {
   };
 
   return (
-	<>
-    <AuthedUserContext.Provider value={user}>
-      <Navbar handleSignout={handleSignout} />
-      <Routes>
-        {user ? (
-			<>
-          // Protected routes
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/courses" element={<Courses />} />
-			<Route path="/signout" element={<Landing />} />
-			</>
-        ) : (
-			<>
-          // Not Protected
-            <Route path="/" element={<Landing setUser={setUser}/>} />
-            <Route path="/about" element={<About />} />
-            <Route path="/signup" element={<SignupForm setUser={setUser} />} />
-            <Route path="/signin" element={<SignIn setUser={setUser} />} />
-			</>
-        )}
-      </Routes>
-    </AuthedUserContext.Provider>
-	</>
+    <>
+      <AuthedUserContext.Provider value={user}>
+        <Navbar handleSignout={handleSignout} />
+        <Routes>
+          {user ? (
+            <>
+              // Protected routes
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/signout" element={<Landing />} />
+            </>
+          ) : (
+            <>
+              // Not Protected
+              <Route path="/" element={<Landing setUser={setUser} />} />
+              <Route path="/about" element={<About />} />
+              <Route
+                path="/signup"
+                element={<SignupForm setUser={setUser} />}
+              />
+              <Route path="/signin" element={<SignIn setUser={setUser} />} />
+            </>
+          )}
+        </Routes>
+      </AuthedUserContext.Provider>
+    </>
   );
 };
 

@@ -11,34 +11,62 @@ const Dashboard = () => {
   const [formData, setFormData] = useState({ text: "" });
   const userId = user._id;
 
+  const fetchTodos = async () => {
+    try {
+      const userTodosData = await userServices.indexTodos(userId);
+      setTodos(userTodosData);
+    } catch (error) {
+      console.error("Error fetching todos:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
-      const userCoursesData = await userServices.indexCourses(userId);
-      const userTodosData = await userServices.indexTodos(userId);
-      setCourses(userCoursesData);
-      if (JSON.stringify(todos) !== JSON.stringify(userTodosData)) {
-        setTodos(userTodosData);
+      try {
+        const userCoursesData = await userServices.indexCourses(userId);
+        setCourses(userCoursesData);
+        await fetchTodos();
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
     };
+
     if (user) fetchUserData();
   }, [user]);
 
   const handleChange = (evt) => {
-	setFormData({ ...formData, [evt.target.name]: evt.target.value });
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
-  const handleSubmit = (evt) => {
-
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    await handleCreateTodo();
   };
 
-  const deleteTodo = () => {}
+  const handleCreateTodo = async () => {
+    try {
+      const updatedFormData = { ...formData, isComplete: false };
+      await userServices.createTodo(userId, updatedFormData);
+      setFormData({ text: "" });
+      await fetchTodos();
+    } catch (error) {
+      console.error("Error creating todo:", error);
+    }
+  };
 
-  const editTodo = () => {};
+  const deleteTodo = (todoId) => {
+    console.log(`Delete functionality for todo with ID ${todoId}`);
+  };
 
-  const dropCourse = () => {}
+  const editTodo = (todoId) => {
+    console.log(`Edit functionality for todo with ID ${todoId}`);
+  };
+
+  const dropCourse = (courseId) => {
+    console.log(`Drop course functionality for course with ID ${courseId}`);
+  };
 
   const completeTodo = async (e, todoId) => {
-    //Chat-GPT
     e.preventDefault();
 
     try {
@@ -58,7 +86,7 @@ const Dashboard = () => {
 
       await userServices.updateTodos(userId, todoId, updatedTodo);
     } catch (error) {
-      console.error(error);
+      console.error("Error completing todo:", error);
     }
   };
 
@@ -67,12 +95,12 @@ const Dashboard = () => {
       <section>
         <h2>Enrolled Courses</h2>
         {courses.map((course) => (
-			<article key={course._id}> 
-          <Link to={`/courses/${course._id}`}>
-            <article>{course.name}</article>
-          </Link>
-		  <button onClick={dropCourse(course._id)}>Drop</button>
-		  </article>
+          <article key={course._id}>
+            <Link to={`/courses/${course._id}`}>
+              <article>{course.name}</article>
+            </Link>
+            <button onClick={() => dropCourse(course._id)}>Drop</button>
+          </article>
         ))}
       </section>
 
@@ -101,7 +129,6 @@ const Dashboard = () => {
             onChange={handleChange}
           />
           <button type="submit">Submit</button>
-		  <button onClick={deleteTodo}>Delete</button>
         </form>
       </section>
     </>

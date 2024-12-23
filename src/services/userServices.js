@@ -29,6 +29,23 @@ const indexTodos = async (userId) => {
     }
 }
 
+const createTodo = async (userId, todoFormData) => {
+    try {
+        const token = localStorage.getItem("token")
+        const res = await fetch(`${BASE_URL}/${userId}/todos`,{
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(todoFormData),
+        })
+        return res.json
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 const updateTodos = async (userId, todoId, updatedTodo) => {
     try {
         const token = localStorage.getItem("token")
@@ -45,4 +62,4 @@ const updateTodos = async (userId, todoId, updatedTodo) => {
         console.log(error)
     }
 }
-export { indexCourses, indexTodos, updateTodos }
+export { indexCourses, indexTodos, updateTodos, createTodo }
