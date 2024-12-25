@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Courses from './components/Courses/Courses';
 import About from './components/About/About';
 import * as authService from '../src/services/authServices';
+import Lesson from './components/Lesson/Lesson';
 import './App.css';
 
 export const AuthedUserContext = createContext(null);
@@ -31,6 +32,11 @@ const App = () => {
 					<>
 						<Route path='/dashboard' element={<Dashboard />} />
 						<Route path='/courses' element={<Courses />} />
+						<Route path='/lesson' element={<Lesson />} />
+						{/* <Route
+							path='/courses/:courseId/lesson/:lessonId'
+							element={<Lesson />}
+						/> */}
 					</>
 				) : (
 					// Not Protected

@@ -1,0 +1,77 @@
+.container {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 20px;
+	overflow: auto;
+	flex-wrap: wrap;
+	text-align: left;
+	position: relative;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	color: #fff;
+	margin-top: 8rem;
+}
+
+.courseName {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.navTabs {
+	display: flex;
+	/* gap: 20px; */
+	justify-content: flex-end;
+	margin-top: -200px;
+}
+
+.homeButton {
+	position: absolute;
+	top: 120px;
+	right: 0;
+	padding: 10px 20px;
+	font-size: 1rem;
+	border: none;
+	cursor: pointer;
+}
+
+.homeButton:hover {
+	background-color: #b3b9c0;
+}
+
+.tab {
+	padding: 10px 15px;
+	font-size: 1rem;
+	border: none;
+	cursor: pointer;
+}
+
+.tab:hover {
+	background-color: #3e6288;
+}
+
+.lessonSection {
+	display: flex;
+	justify-content: flex-start;
+	align-items: left;
+	flex-grow: 1;
+	padding: 20px;
+}
+
+.lessonName {
+	padding: 20px;
+	width: 275%;
+	border: none;
+	border-radius: 5px;
+	text-align: left;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #fff;
+	margin: 2rem;
+}
