@@ -3,12 +3,7 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	/* overflow: hidden; */
-	background-color: #007bff;
-	font-family: Arial, sans-serif;
-}
-
-body {
+	overflow: hidden;
 	background-color: #007bff;
 	font-family: Arial, sans-serif;
 }
@@ -22,6 +17,9 @@ h1 {
 h1 em {
 	font-style: italic;
 	color: #ffd700;
+}
+div {
+	margin-top: 35px;
 }
 
 .input {
@@ -40,18 +38,6 @@ h1 em {
 	color: #888;
 	font-style: italic;
 	text-align: center;
-}
-
-.title {
-	text-align: center;
-	font-size: 36px;
-	margin-bottom: 20px;
-	color: #fff;
-}
-
-.inputGroup {
-	margin-bottom: 15px;
-	width: 100%;
 }
 
 .label {
