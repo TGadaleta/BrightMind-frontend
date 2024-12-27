@@ -23,22 +23,24 @@ const App = () => {
 		navigate('/');
 	};
 
+
 	return (
 		<AuthedUserContext.Provider value={user}>
 			<Navbar handleSignout={handleSignout} />
 			<Routes>
 				<Route path='/courses' element={<Courses />} />
 				<Route path='/courses/:courseId' element={<SoloCourse />} />
+        <Route path='/about' element={<About />} />
 				{user ? (
 					// Protected routes
 					<>
 						<Route path='/' element={<Dashboard />} />
+            <Route path="/signout" element={<Landing />} />
 					</>
 				) : (
 					// Not Protected
 					<>
 						<Route path='/' element={<Landing />} />
-						<Route path='/about' element={<About />} />
 						<Route path='/signin' element={<SignIn setUser={setUser} />} />
 						<Route path='/signup' element={<SignupForm setUser={setUser} />} />
 					</>

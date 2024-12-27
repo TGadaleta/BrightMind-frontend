@@ -17,7 +17,7 @@ const Navbar = (props) => {
         <ul className={styles.navList}>
           {user ? (
             <li className={styles.navItem}>
-              <Link to="/dashboard" className={styles.navLink}>
+              <Link to="/" className={styles.navLink}>
                 Dashboard
               </Link>
             </li>
