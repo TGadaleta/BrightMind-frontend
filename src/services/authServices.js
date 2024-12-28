@@ -42,8 +42,7 @@ const signin = async (user) => {
 			return user;
 		}
 	} catch (err) {
-		console.log(err);
-		throw err;
+		throw new Error(err);
 	}
 };
 
