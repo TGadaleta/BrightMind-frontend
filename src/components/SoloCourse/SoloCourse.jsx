@@ -25,8 +25,17 @@ const SoloCourse = () => {
 
 	if (!course) return <p>Loading course...</p>;
 
-	const joinCourse = () => {
-
+	const joinCourse = async () => {
+		try {
+			currentUser.courses = await userServices.userCourses(userId)
+			const currentUserCourses = currentUser.courses.map(course => course._id)
+			if (currentUserCourses.includes(courseId)){
+				throw new Error("You already are in this course")
+			}
+			const joinedCourse = await userServices.joinCourse(userId, courseId)
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return (

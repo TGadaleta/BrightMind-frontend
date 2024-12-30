@@ -99,7 +99,7 @@ const Dashboard = () => {
     }
   };
 
-  const dropCourse = async (courseId) => {
+  const dropCourse = async (userId, courseId) => {
     try {
       await userServices.dropCourse(userId, courseId);
       const droppedCourse = courses.find((course) => course._id === courseId);
