@@ -15,6 +15,21 @@ const userCourses = async (userId) => {
     }
 }
 
+const joinCourse = async (userId, courseId) => {
+    try {
+        const token = localStorage.getItem("token")
+        const res = await fetch (`${BASE_URL}/${userId}/courses/${courseId}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return res.json();
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 const dropCourse = async (userId, courseId) => {
     try {
         const token = localStorage.getItem("token")
@@ -94,4 +109,4 @@ const deleteTodo = async (userId, todoId) => {
   
     return await res.json();
   };
-export { userCourses, dropCourse, indexTodos, updateTodos, createTodo, deleteTodo, }
+export { userCourses, joinCourse, dropCourse, indexTodos, updateTodos, createTodo, deleteTodo, }
