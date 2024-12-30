@@ -144,7 +144,7 @@ const Dashboard = () => {
             <Link to={`/courses/${course._id}`}>
               <article>{course.name}</article>
             </Link>
-            <button onClick={() => dropCourse(course._id)}>Drop</button>
+            <button onClick={() => dropCourse(userId, course._id)}>Drop</button>
           </article>
         ))}
       </section>
