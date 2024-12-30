@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import * as coursesServices from '../../services/coursesServices';
 import styles from './SoloCourse.module.css';
+import { AuthedUserContext } from "../../App";
+import { useParams, Link } from 'react-router-dom';
+import * as userServices from '../../services/userServices'
+import React, { useState, useEffect, useContext } from 'react';
+import * as coursesServices from '../../services/coursesServices';
 
-const SoloCourse = ({ user }) => {
+const SoloCourse = () => {
 	const { courseId } = useParams();
 	const [course, setCourse] = useState([]);
+	const currentUser = useContext(AuthedUserContext);
+	const userId = currentUser._id; 
 
 	useEffect(() => {
 		const fetchSoloCourse = async () => {
@@ -20,6 +24,10 @@ const SoloCourse = ({ user }) => {
 	}, [courseId]);
 
 	if (!course) return <p>Loading course...</p>;
+
+	const joinCourse = () => {
+
+	}
 
 	return (
 		<main className={styles.container}>
@@ -41,7 +49,7 @@ const SoloCourse = ({ user }) => {
 								</p>
 
 								{/* Authorized Users */}
-								{user &&
+								{currentUser &&
 									course.username &&
 									course.username._id === user._id && (
 										<Link to={`/courses/${courseId}/lessons/${lesson._id}`}>
@@ -52,7 +60,7 @@ const SoloCourse = ({ user }) => {
 						))}
 					</div>
 					<div className={styles.topRightButton}>
-						<button type='submit' className={styles.joinBtn}>
+						<button type='button' onClick={joinCourse} className={styles.joinBtn}>
 							Join
 						</button>
 					</div>

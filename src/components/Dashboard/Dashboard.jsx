@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { AuthedUserContext } from "../../App";
-import * as userServices from "../../services/userServices.js";
 import { Link } from "react-router-dom";
 import styles from "./Dashboard.module.css";
+import { AuthedUserContext } from "../../App";
+import React, { useEffect, useState } from "react";
+import * as userServices from "../../services/userServices.js";
 
 const Dashboard = () => {
 
@@ -24,7 +24,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userCoursesData = await userServices.indexCourses(userId);
+        const userCoursesData = await userServices.userCourses(userId);
         setCourses(userCoursesData);
         await fetchTodos();
       } catch (error) {

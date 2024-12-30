@@ -1,6 +1,6 @@
 const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/users`;
 
-const indexCourses = async (userId) => {
+const userCourses = async (userId) => {
     try {
         const token = localStorage.getItem("token")
         const res = await fetch(`${BASE_URL}/${userId}/courses`, {
@@ -74,7 +74,7 @@ const updateTodos = async (userId, todoId, updatedTodo) => {
         });
         return res.json()
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -94,4 +94,4 @@ const deleteTodo = async (userId, todoId) => {
   
     return await res.json();
   };
-export { indexCourses, dropCourse, indexTodos, updateTodos, createTodo, deleteTodo, }
+export { userCourses, dropCourse, indexTodos, updateTodos, createTodo, deleteTodo, }
