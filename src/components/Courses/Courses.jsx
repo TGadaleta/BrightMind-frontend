@@ -14,6 +14,7 @@ const Courses = () => {
 		fetchCourses();
 	}, []);
 	console.log(courses);
+
 	return (
 		<>
 			<h2>COURSES</h2>

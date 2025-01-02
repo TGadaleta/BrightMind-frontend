@@ -13,7 +13,6 @@ const index = async () => {
 const showCourse = async (courseId) => {
 	try {
 		const res = await fetch(`${BASE_URL}/${courseId}`);
-
 		return res.json();
 	} catch (error) {
 		console.error(error);

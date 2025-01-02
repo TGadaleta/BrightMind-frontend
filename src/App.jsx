@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Courses from './components/Courses/Courses';
 import About from './components/About/About';
 import SoloCourse from './components/SoloCourse/SoloCourse';
+import Lesson2 from './components/Lesson2/Lesson2';
 import * as authService from '../src/services/authServices';
 import './App.css';
 
@@ -23,19 +24,23 @@ const App = () => {
 		navigate('/');
 	};
 
-
 	return (
 		<AuthedUserContext.Provider value={user}>
 			<Navbar handleSignout={handleSignout} />
 			<Routes>
 				<Route path='/courses' element={<Courses />} />
 				<Route path='/courses/:courseId' element={<SoloCourse />} />
-        <Route path='/about' element={<About />} />
+				<Route path='/about' element={<About />} />
 				{user ? (
 					// Protected routes
 					<>
 						<Route path='/' element={<Dashboard />} />
-            <Route path="/signout" element={<Landing />} />
+						<Route path='/signout' element={<Landing />} />
+						<Route path='/courses/lesson2/:lessonId' element={<Lesson2 />} />
+						{/* <Route
+							path='/courses/:userId/courses/:courseId/:lessonId'
+							element={<Lesson2 />}
+						/> */}
 					</>
 				) : (
 					// Not Protected

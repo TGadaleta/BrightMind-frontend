@@ -52,9 +52,11 @@ const SoloCourse = ({ user }) => {
 						))}
 					</div>
 					<div className={styles.topRightButton}>
-						<button type='submit' className={styles.joinBtn}>
-							Join
-						</button>
+						<Link to='../Courses/lesson2/12345'>
+							<button type='submit' className={styles.joinBtn}>
+								Join
+							</button>
+						</Link>
 					</div>
 				</div>
 			) : (
