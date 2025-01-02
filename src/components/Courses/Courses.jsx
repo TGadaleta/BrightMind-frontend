@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Courses.module.css';
+import React, { useEffect, useState } from 'react';
 import * as coursesServices from '../../services/coursesServices.js';
 
 const Courses = () => {
@@ -13,12 +13,9 @@ const Courses = () => {
 		};
 		fetchCourses();
 	}, []);
-	console.log(courses);
-
 	return (
 		<>
 			<h2>COURSES</h2>
-
 			<main className={styles.container}>
 				{courses.map((course) => (
 					<Link key={course._id} to={`/courses/${course._id}`}>
