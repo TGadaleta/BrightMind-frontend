@@ -1,5 +1,22 @@
 const BASE_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/users`;
 
+const indexLesson = async (userId, courseId, lessonId) => {
+	try {
+		const token = localStorage.getItem('token');
+		const res = await fetch(
+			`${BASE_URL}/${userId}/courses/${courseId}/${lessonId}`,
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		);
+		return res.json();
+	} catch (error) {
+		console.error(error);
+	}
+};
+
 const userCourses = async (userId) => {
     try {
         const token = localStorage.getItem("token")
@@ -31,50 +48,50 @@ const joinCourse = async (userId, courseId) => {
 }
 
 const dropCourse = async (userId, courseId) => {
-    try {
-        const token = localStorage.getItem("token")
-        const res = await fetch(`${BASE_URL}/${userId}/courses/${courseId}/drop`, {
-            method: 'PUT',
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        return res.json();
-    } catch (error) {
-        console.error(error)
-    }
-}
+	try {
+		const token = localStorage.getItem('token');
+		const res = await fetch(`${BASE_URL}/${userId}/courses/${courseId}/drop`, {
+			method: 'PUT',
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		return res.json();
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 const indexTodos = async (userId) => {
-    try {
-        const token = localStorage.getItem("token")
-        const res = await fetch(`${BASE_URL}/${userId}/todos`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        return res.json()
-    } catch (error) {
-        console.error(error)
-    }
-}
+	try {
+		const token = localStorage.getItem('token');
+		const res = await fetch(`${BASE_URL}/${userId}/todos`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		return res.json();
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 const createTodo = async (userId, todoFormData) => {
-    try {
-        const token = localStorage.getItem("token")
-        const res = await fetch(`${BASE_URL}/${userId}/todos`,{
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(todoFormData),
-        })
-        return res.json
-    } catch (error) {
-        console.error(error)
-    }
-}
+	try {
+		const token = localStorage.getItem('token');
+		const res = await fetch(`${BASE_URL}/${userId}/todos`, {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(todoFormData),
+		});
+		return res.json;
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 const updateTodos = async (userId, todoId, updatedTodo) => {
     try {
@@ -109,4 +126,4 @@ const deleteTodo = async (userId, todoId) => {
   
     return await res.json();
   };
-export { userCourses, joinCourse, dropCourse, indexTodos, updateTodos, createTodo, deleteTodo, }
+export { userCourses, joinCourse, dropCourse, indexTodos, updateTodos, indexLesson, createTodo, deleteTodo, }

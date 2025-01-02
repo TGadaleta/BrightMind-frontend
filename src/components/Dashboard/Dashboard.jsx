@@ -148,7 +148,6 @@ const Dashboard = () => {
           </article>
         ))}
       </section>
-
       <section>
         <h2>Todos</h2>
         {todos.map((todo) => (

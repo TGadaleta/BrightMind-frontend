@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styles from './SoloCourse.module.css';
 import { AuthedUserContext } from "../../App";
 import { useParams, Link } from 'react-router-dom';
