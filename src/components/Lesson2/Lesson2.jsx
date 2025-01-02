@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import styles from './Lesson2.module.css';
+import { useEffect, useState, useContext } from 'react';
+import { AuthedUserContext } from "../../App";
 import { Link, useParams } from 'react-router-dom';
 import * as userServices from '../../services/userServices.js';
-import styles from './Lesson2.module.css';
 
 const Lesson2 = () => {
-	const { userId, courseId, lessonId } = useParams();
-	const [lesson, setLesson] = useState(null);
+	const currentUser = useContext(AuthedUserContext);
+	const userId = currentUser._id;
+	const { courseId, lessonId } = useParams();
+	const [lesson, setLesson] = useState();
 
 	useEffect(() => {
 		if (!userId || !courseId || !lessonId) {
@@ -15,12 +18,12 @@ const Lesson2 = () => {
 
 		const fetchLesson = async () => {
 			try {
-				const lessonData = await userServices.showLesson(
+				const lessonData = await userServices.indexLesson(
 					userId,
 					courseId,
 					lessonId
 				);
-
+				console.log(lessonData)
 				if (lessonData) {
 					setLesson(lessonData);
 				}
@@ -28,9 +31,9 @@ const Lesson2 = () => {
 				console.error('Error fetching lesson:', error);
 			}
 		};
-
 		fetchLesson();
 	}, [userId, courseId, lessonId]);
+
 	if (!lesson) return <p className='error'>Failed to load lesson</p>;
 
 	return (

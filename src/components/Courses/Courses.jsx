@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import styles from './Courses.module.css';
-import React, { useEffect, useState } from 'react';
+import { AuthedUserContext } from "../../App";
+import { useEffect, useState, useContext } from 'react';
 import * as coursesServices from '../../services/coursesServices.js';
 
 const Courses = () => {
 	const [courses, setCourses] = useState([]);
+	const currentUser = useContext(AuthedUserContext)
 
 	useEffect(() => {
 		const fetchCourses = async () => {
@@ -18,13 +20,23 @@ const Courses = () => {
 			<h2>COURSES</h2>
 			<main className={styles.container}>
 				{courses.map((course) => (
-					<Link key={course._id} to={`/courses/${course._id}`}>
-						<section>
-							<h2>{course.name}</h2>
-							<h3>{course.department}</h3>
-							<p>{course.description}</p>
-						</section>
-					</Link>
+					<div key={course._id}>
+						{currentUser ? (
+							<Link to={`/courses/${course._id}`}>
+								<section>
+									<h2>{course.name}</h2>
+									<h3>{course.department}</h3>
+									<p>{course.description}</p>
+								</section>
+							</Link>
+						) : (
+							<section className={styles.disabledLink}>
+								<h2>{course.name}</h2>
+								<h3>{course.department}</h3>
+								<p>{course.description}</p>
+							</section>
+						)}
+					</div>
 				))}
 			</main>
 		</>

@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
 import styles from './SoloCourse.module.css';
 import { AuthedUserContext } from "../../App";
 import { useParams, Link } from 'react-router-dom';
 import * as userServices from '../../services/userServices';
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import * as coursesServices from '../../services/coursesServices';
 
 const SoloCourse = () => {
@@ -72,13 +71,13 @@ const SoloCourse = () => {
 									<strong>Description:</strong> {lesson.text || 'TBA'}
 								</p>
 
-								{currentUser &&
+								{/* {currentUser &&
 									course.username &&
-									course.username._id === currentUser._id && (
-										<Link to={`/courses/${courseId}/lessons/${lesson._id}`}>
+									course.username._id === currentUser._id && ( */}
+										<Link to={`/courses/${courseId}/${lesson._id}`}>
 											View Lesson
 										</Link>
-									)}
+									{/* )} */}
 							</div>
 						))}
 					</div>
