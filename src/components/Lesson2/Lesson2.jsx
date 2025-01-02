@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import * as coursesServices from '../../services/coursesServices.js';
+import * as userServices from '../../services/userServices.js';
 import styles from './Lesson2.module.css';
 
-const Lesson2 = ({ user }) => {
+const Lesson2 = () => {
 	const { userId, courseId, lessonId } = useParams();
-
 	const [lesson, setLesson] = useState(null);
 
 	useEffect(() => {
@@ -13,11 +12,10 @@ const Lesson2 = ({ user }) => {
 			console.error('Missing parameters: userId, courseId, or lessonId');
 			return;
 		}
-		const fetchLesson = async () => {
-			console.log('Parameters:', { userId, courseId, lessonId });
 
+		const fetchLesson = async () => {
 			try {
-				const lessonData = await coursesServices.showLesson(
+				const lessonData = await userServices.showLesson(
 					userId,
 					courseId,
 					lessonId
@@ -29,13 +27,10 @@ const Lesson2 = ({ user }) => {
 			} catch (error) {
 				console.error('Error fetching lesson:', error);
 			}
-			
+		};
+
 		fetchLesson();
 	}, [userId, courseId, lessonId]);
-
-	const [loading, setLoading] = useState(true);
-
-	if (loading) return <p className='loading'>Loading lesson...</p>;
 	if (!lesson) return <p className='error'>Failed to load lesson</p>;
 
 	return (

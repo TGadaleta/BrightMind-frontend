@@ -37,10 +37,6 @@ const App = () => {
 						<Route path='/' element={<Dashboard />} />
 						<Route path='/signout' element={<Landing />} />
 						<Route path='/courses/lesson2/:lessonId' element={<Lesson2 />} />
-						{/* <Route
-							path='/courses/:userId/courses/:courseId/:lessonId'
-							element={<Lesson2 />}
-						/> */}
 					</>
 				) : (
 					// Not Protected
