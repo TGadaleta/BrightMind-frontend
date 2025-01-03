@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
 import styles from './SoloCourse.module.css';
-import { AuthedUserContext } from "../../App";
+import { AuthedUserContext } from '../../App';
 import { useParams, Link } from 'react-router-dom';
 import * as userServices from '../../services/userServices';
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import * as coursesServices from '../../services/coursesServices';
 
 const SoloCourse = () => {
@@ -11,7 +10,7 @@ const SoloCourse = () => {
 	const [course, setCourse] = useState([]);
 	const [isJoined, setIsJoined] = useState(false);
 	const currentUser = useContext(AuthedUserContext);
-	const userId = currentUser._id; 
+	const userId = currentUser._id;
 
 	useEffect(() => {
 		const fetchSoloCourse = async () => {
@@ -29,7 +28,7 @@ const SoloCourse = () => {
 				const userCourses = await userServices.userCourses(userId);
 
 				// Extract course IDs from the user's courses
-				const userCourseIds = userCourses.map(course => course._id);
+				const userCourseIds = userCourses.map((course) => course._id);
 
 				// Check if the current courseId exists in the user's enrolled course IDs
 				setIsJoined(userCourseIds.includes(courseId));
@@ -84,7 +83,11 @@ const SoloCourse = () => {
 					</div>
 					<div className={styles.topRightButton}>
 						{!isJoined && (
-							<button type='button' onClick={joinCourse} className={styles.joinBtn}>
+							<button
+								type='button'
+								onClick={joinCourse}
+								className={styles.joinBtn}
+							>
 								Join
 							</button>
 						)}
