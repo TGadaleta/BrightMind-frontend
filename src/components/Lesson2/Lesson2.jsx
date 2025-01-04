@@ -23,7 +23,6 @@ const Lesson2 = () => {
 					courseId,
 					lessonId
 				);
-				console.log(lessonData)
 				if (lessonData) {
 					setLesson(lessonData);
 				}
