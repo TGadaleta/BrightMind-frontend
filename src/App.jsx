@@ -6,7 +6,7 @@ import Courses from './components/Courses/Courses';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import SoloCourse from './components/SoloCourse/SoloCourse';
-import Lesson2 from './components/Lesson2/Lesson2';
+import LessonPage from './components/Lesson2/Lesson2';
 import SignupForm from './components/SignupForm/SignupForm';
 import * as authService from '../src/services/authServices';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -35,7 +35,7 @@ const App = () => {
 					<>
 						<Route path='/' element={<Dashboard />} />
 						<Route path='/signout' element={<Landing />} />
-						<Route path='/courses/lesson2/:lessonId' element={<Lesson2 />} />
+						<Route path='/courses/:courseId/:lessonId' element={<LessonPage />} />
 					</>
 				) : (
 					// Not Protected

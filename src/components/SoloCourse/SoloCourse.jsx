@@ -70,14 +70,12 @@ const SoloCourse = () => {
 								<p>
 									<strong>Description:</strong> {lesson.text || 'TBA'}
 								</p>
-
-								{currentUser &&
-									course.username &&
-									course.username._id === currentUser._id && (
-										<Link to={`/courses/${courseId}/lessons/${lesson._id}`}>
+									{isJoined ?
+										<Link to={`/courses/${courseId}/${lesson._id}`}>
 											View Lesson
 										</Link>
-									)}
+									: <></>
+									}
 							</div>
 						))}
 					</div>
