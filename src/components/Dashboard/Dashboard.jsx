@@ -136,7 +136,6 @@ const Dashboard = () => {
 
 	return (
 		<>
-			<Navbar />
 			<Typography
 				variant='h4'
 				sx={{
