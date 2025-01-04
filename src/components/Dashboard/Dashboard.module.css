@@ -1,0 +1,86 @@
+.dashboard {
+	background-color: #007bff;
+	min-height: 100vh;
+	padding-top: 80px;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	padding: 20px;
+	justify-content: space-between;
+}
+
+.section {
+	flex: 1;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sectionTitle {
+	font-size: 1.25rem;
+	margin-bottom: 10px;
+}
+
+.sectionDivider {
+	border: none;
+	height: 2px;
+	background-color: #ccc;
+	margin-bottom: 16px;
+}
+
+.courseItem,
+.todoItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.todoForm {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.inputField {
+	flex: 1;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+button {
+	padding: 8px 12px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.dropButton {
+	background-color: #d32f2f;
+	color: white;
+}
+
+.addButton {
+	background-color: #1976d2;
+	color: white;
+}
+
+.editButton {
+	background-color: #0288d1;
+	color: white;
+}
+
+.completeButton {
+	background-color: #fbc02d;
+	color: white;
+}
+
+.deleteButton {
+	background-color: #d32f2f;
+	color: white;
+}
