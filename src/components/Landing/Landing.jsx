@@ -5,6 +5,7 @@ import * as authService from '../../services/authServices.js';
 
 const Landing = (props) => {
 	const navigate = useNavigate();
+	const [error, setError] = useState(null);
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
@@ -12,6 +13,7 @@ const Landing = (props) => {
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
+		setError(null);
 	};
 
 	const handleSubmit = async (e) => {
@@ -20,8 +22,8 @@ const Landing = (props) => {
 			const user = await authService.signin(formData);
 			props.setUser(user);
 			navigate('/');
-		} catch (error) {
-			console.error(error);
+		} catch (err) {
+			setError(err);
 		}
 	};
 
@@ -79,6 +81,7 @@ const Landing = (props) => {
 						</button>
 					</div>
 				</form>
+				{error && <div className='error'>{error.message}</div>}
 			</div>
 		</div>
 	);
