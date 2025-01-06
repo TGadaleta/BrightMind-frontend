@@ -26,7 +26,7 @@ const SignupForm = (props) => {
 		try {
 			const newUserResponse = await authService.signup(formData);
 			props.setUser(newUserResponse.user);
-			navigate('/dashboard');
+			navigate('/');
 		} catch (error) {
 			console.error(error);
 		}
