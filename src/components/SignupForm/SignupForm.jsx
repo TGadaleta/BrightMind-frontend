@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './SignupForm.module.css';
 import * as authService from '../../services/authServices.js';
 
 const SignupForm = (props) => {
 	const navigate = useNavigate();
+	const [error, setError] = useState(null);
 	const [formData, setFormData] = useState({
 		username: '',
 		email: '',
@@ -14,6 +15,7 @@ const SignupForm = (props) => {
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
+		setError(null);
 	};
 
 	const isFormValid = () => {
@@ -25,10 +27,11 @@ const SignupForm = (props) => {
 		e.preventDefault();
 		try {
 			const newUserResponse = await authService.signup(formData);
+
 			props.setUser(newUserResponse.user);
 			navigate('/');
-		} catch (error) {
-			console.error(error);
+		} catch (err) {
+			setError(err);
 		}
 	};
 
@@ -55,6 +58,7 @@ const SignupForm = (props) => {
 							placeholder='Enter your username'
 							required
 						/>
+						{error && <div className='error'>{error.message}</div>}
 					</div>
 
 					<div className={styles.inputGroup}>
