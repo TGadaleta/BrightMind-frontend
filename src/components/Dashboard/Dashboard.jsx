@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AuthedUserContext } from '../../App';
 import React, { useEffect, useState } from 'react';
-import Navbar from '../Navbar/Navbar';
 import { Box, Button, TextField, Typography, Paper } from '@mui/material';
 import * as userServices from '../../services/userServices.js';
 

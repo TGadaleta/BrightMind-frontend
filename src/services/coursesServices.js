@@ -18,4 +18,22 @@ const showCourse = async (courseId) => {
 	}
 };
 
-export { index, showCourse };
+//Needs verification
+const addCourse = async (courseFormData) => { 
+	try {
+		const token = localStorage.getItem('token');
+		const res = await fetch(`${BASE_URL}/add`, {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+				body: JSON.stringify(courseFormData)
+			}
+		});
+		return res.json;
+	} catch (error) {
+		return res.error.json(error)
+	}
+}
+
+export { index, showCourse, addCourse };
