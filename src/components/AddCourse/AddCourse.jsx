@@ -1,22 +1,29 @@
 import React from 'react';
 import { AuthedUserContext } from '../../App';
 import styles from './AddCourse.module.css';
+import * as courseServices from '../../services/coursesServices.js';
+import { useNavigate } from 'react-router-dom';
 
 const AddCourse = () => {
   const user = React.useContext(AuthedUserContext);
-  const [error, setError] = React.useState(null);
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     name: '',
     department: '',
     description: '',
+    owner: user._id,
   });
+
+  const handleBack = (e) => {
+    navigate('/courses')
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name === 'description') {
       const textarea = e.target;
-      textarea.style.height = 'auto'; 
+      textarea.style.height = 'auto';
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
 
@@ -25,7 +32,22 @@ const AddCourse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    try {
+      const res = await courseServices.addCourse(formData);
+      if (res.status === 200) {
+        setFormData({
+          name: '',
+          department: '',
+          description: '',
+        });
+        navigate(`/courses`);
+      } else {
+        console.error('Error adding course:', res.message);
+        alert(res.message || 'Failed to add course. Please try again.');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const { name, department, description } = formData;
@@ -34,10 +56,8 @@ const AddCourse = () => {
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <h1 className="bm">Bright Mind</h1>
-        <h1 className="addCourse">Add Course</h1>
-
+        <h2 className="addCourse">Add Course</h2>
         <form onSubmit={handleSubmit}>
-          {/* Course Name */}
           <div className={styles.inputGroup}>
             <label htmlFor="courseName" className={styles.label}>
               Course Name
@@ -52,10 +72,7 @@ const AddCourse = () => {
               placeholder="Name"
               required
             />
-            {error && <div className="error"> {error.message}</div>}
           </div>
-
-          {/* Course Department */}
           <div className={styles.inputGroup}>
             <label htmlFor="courseDepartment" className={styles.label}>
               Course Department
@@ -71,8 +88,6 @@ const AddCourse = () => {
               required
             />
           </div>
-
-          {/* Course Description */}
           <div className={styles.inputGroup}>
             <label htmlFor="courseDescription" className={styles.label}>
               Course Description
@@ -95,11 +110,11 @@ const AddCourse = () => {
               required
             />
           </div>
-
           <button type="submit" className={styles.addCourseBtn}>
             Add Course
           </button>
         </form>
+        <button type='button' onClick={handleBack}>Back</button>
       </div>
     </div>
   );

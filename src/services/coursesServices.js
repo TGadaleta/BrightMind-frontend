@@ -27,12 +27,13 @@ const addCourse = async (courseFormData) => {
 			headers: {
 				Authorization: `Bearer ${token}`,
 				'Content-Type': 'application/json',
+			},
 				body: JSON.stringify(courseFormData)
-			}
 		});
-		return res.json;
+		return res.json();
 	} catch (error) {
-		return res.error.json(error)
+		console.error(error)
+		throw error
 	}
 }
 

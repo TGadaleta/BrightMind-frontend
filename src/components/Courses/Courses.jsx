@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Courses.module.css';
 import { AuthedUserContext } from "../../App";
 import { useEffect, useState, useContext } from 'react';
@@ -7,6 +7,11 @@ import * as coursesServices from '../../services/coursesServices.js';
 const Courses = () => {
 	const [courses, setCourses] = useState([]);
 	const currentUser = useContext(AuthedUserContext)
+	const navigate = useNavigate();
+
+	const handleAddCourse = () => {
+		navigate('/courses/add')
+	}
 
 	useEffect(() => {
 		const fetchCourses = async () => {
@@ -18,6 +23,8 @@ const Courses = () => {
 	return (
 		<>
 			<h2>COURSES</h2>
+			{currentUser &&
+			<button type='button' onClick={handleAddCourse}>Add Course</button>}
 			<main className={styles.container}>
 				{courses.map((course) => (
 					<div key={course._id}>
