@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const AddCourse = () => {
   const user = React.useContext(AuthedUserContext);
   const navigate = useNavigate();
+  const [error, setError] = React.useState(null)
   const [formData, setFormData] = React.useState({
     name: '',
     department: '',
@@ -33,17 +34,12 @@ const AddCourse = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setError(null)
       const res = await courseServices.addCourse(formData);
-      if (res.status === 200) {
-        setFormData({
-          name: '',
-          department: '',
-          description: '',
-        });
+      if (res._id) {
         navigate(`/courses`);
       } else {
-        console.error('Error adding course:', res.message);
-        alert(res.message || 'Failed to add course. Please try again.');
+        setError(res.message)
       }
     } catch (error) {
       console.error(error);
@@ -110,6 +106,8 @@ const AddCourse = () => {
               required
             />
           </div>
+          {error &&
+          <div>{error}</div>}
           <button type="submit" className={styles.addCourseBtn}>
             Add Course
           </button>
