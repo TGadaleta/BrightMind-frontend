@@ -1,14 +1,15 @@
 import styles from './SoloCourse.module.css';
 import { AuthedUserContext } from '../../App';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import * as userServices from '../../services/userServices';
 import { useState, useEffect, useContext } from 'react';
 import * as coursesServices from '../../services/coursesServices';
 
 const SoloCourse = () => {
 	const { courseId } = useParams();
-	const [course, setCourse] = useState([]);
+	const [course, setCourse] = useState();
 	const [isJoined, setIsJoined] = useState(false);
+	const [isOwner, setIsOwner] = useState(false);
 	const currentUser = useContext(AuthedUserContext);
 	const userId = currentUser._id;
 
@@ -37,8 +38,18 @@ const SoloCourse = () => {
 			}
 		};
 
+		const checkIfOwner = async () => {
+			try {
+				const course = await coursesServices.showCourse(courseId)
+				setIsOwner(course.owner == userId)
+			} catch (error) {
+				console.error(error)
+			}
+		}
+
 		fetchSoloCourse();
 		checkIfJoined();
+		checkIfOwner();
 	}, [courseId, userId]);
 
 	if (!course) return <p>Loading course...</p>;
@@ -52,9 +63,24 @@ const SoloCourse = () => {
 		}
 	};
 
+	const addLesson = () => {
+
+	}
+
 	return (
 		<main className={styles.container}>
 			<h1 className={styles.courseName}>{course.name}</h1>
+			<div className={styles.addLessonButton}>
+						{isOwner && (
+							<button
+							type='button'
+							onClick={addLesson}
+							className={styles.addLessonBtn}
+							>
+								Add Lesson
+							</button>
+						)}
+					</div>
 			<h2>Department: {course.department}</h2>
 			<p>{course.description}</p>
 
@@ -92,7 +118,9 @@ const SoloCourse = () => {
 					</div>
 				</div>
 			) : (
+				<>
 				<p>No lessons available for this course.</p>
+				</>
 			)}
 		</main>
 	);
