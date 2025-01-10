@@ -18,7 +18,7 @@ const showCourse = async (courseId) => {
 	}
 };
 
-//Needs verification
+
 const addCourse = async (courseFormData) => { 
 	try {
 		const token = localStorage.getItem('token');
@@ -28,7 +28,7 @@ const addCourse = async (courseFormData) => {
 				Authorization: `Bearer ${token}`,
 				'Content-Type': 'application/json',
 			},
-				body: JSON.stringify(courseFormData)
+			body: JSON.stringify(courseFormData)
 		});
 		return res.json();
 	} catch (error) {
@@ -37,4 +37,22 @@ const addCourse = async (courseFormData) => {
 	}
 }
 
-export { index, showCourse, addCourse };
+const addLesson = async (courseId, lessonFormData) => {
+	try {
+		const token = localStorage.getItem('token');
+		const res = await fetch(`${BASE_URL}/${courseId}/add`, {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(lessonFormData)
+		});
+		return res.json()
+	} catch (error) {
+		console.error(error)
+		throw error
+	}
+}
+
+export { index, showCourse, addCourse, addLesson };
