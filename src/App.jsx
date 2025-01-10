@@ -10,6 +10,7 @@ import LessonPage from './components/Lesson2/Lesson2';
 import SignupForm from './components/SignupForm/SignupForm';
 import * as authService from '../src/services/authServices';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import AddCourse from './components/AddCourse/AddCourse';
 
 export const AuthedUserContext = createContext(null);
 
@@ -35,6 +36,7 @@ const App = () => {
 					<>
 						<Route path='/' element={<Dashboard />} />
 						<Route path='/signout' element={<Landing />} />
+						<Route path='/courses/add' element={<AddCourse />} />
 						<Route path='/courses/:courseId/:lessonId' element={<LessonPage />} />
 					</>
 				) : (
