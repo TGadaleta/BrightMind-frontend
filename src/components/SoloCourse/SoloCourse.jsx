@@ -11,6 +11,7 @@ const SoloCourse = () => {
 	const [isJoined, setIsJoined] = useState(false);
 	const [isOwner, setIsOwner] = useState(false);
 	const currentUser = useContext(AuthedUserContext);
+	const navigate = useNavigate()
 	const userId = currentUser._id;
 
 	useEffect(() => {
@@ -64,7 +65,7 @@ const SoloCourse = () => {
 	};
 
 	const addLesson = () => {
-
+		navigate(`/courses/${courseId}/add`)
 	}
 
 	return (
@@ -93,10 +94,7 @@ const SoloCourse = () => {
 								<p>
 									<strong>Title:</strong> {lesson.name || 'N/A'}
 								</p>
-								<p>
-									<strong>Description:</strong> {lesson.text || 'TBA'}
-								</p>
-									{isJoined ?
+									{isJoined || isOwner ?
 										<Link to={`/courses/${courseId}/${lesson._id}`}>
 											View Lesson
 										</Link>
